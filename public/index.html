@@ -20,6 +20,12 @@
       media="(prefers-color-scheme: dark)"
       content="#434c5e"
     />
+    <style>
+html {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+</style>
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="googlebot" content="index, follow, snippet" />
@@ -69,6 +75,7 @@
       title="Ultraviolet Logo"
       class="flex-center logo-wrapper header-center"
     >
+       <button class="redirect-button" onclick="window.location.href='https://kellarosaa.github.io'">close app</button>
       <img class="logo" src="uv.png" alt="Ultraviolet" />
       <h1>Chrome | Browser</h1>
     </div>
@@ -82,9 +89,6 @@
         type="hidden"
       />
       <input id="uv-address" type="text" placeholder="Search the web" />
-    <a style="position: absolute; top: 0%; left: 0%" href="https://www.freecodecamp.org/">
-    <button>freeCodeCamp</button>
-  </a>
     <div class="desc left-margin">
       <p id="uv-error"></p>
       <pre id="uv-error-code"></pre>
