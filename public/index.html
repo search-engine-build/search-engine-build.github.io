@@ -1,82 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Tabs with Custom HTML</title>
-    <style>
-        .tab {
-            display: none;
-        }
-        .tab.active {
-            display: block;
-        }
-        .tabs {
-            margin-bottom: 10px;
-        }
-        .tab-button {
-            margin-right: 5px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-    <div class="tabs">
-        <button class="tab-button" onclick="openTab(0)">Tab 1</button>
-        <button class="tab-button" onclick="addTab()">Add Tab</button>
-    </div>
-    <div id="tab-content">
-        <div class="tab active" id="tab-0">Insert HTML here for Tab 1</div>
-    </div>
-
-    <script>
-        let tabCount = 1;
-
-        function openTab(index) {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach((tab, i) => {
-                tab.classList.remove('active');
-                if (i === index) {
-                    tab.classList.add('active');
-                }
-            });
-        }
-
-        function addTab() {
-            if (tabCount < 5) {
-                const newTab = document.createElement('div');
-                newTab.className = 'tab';
-                newTab.id = `tab-${tabCount}`;
-                newTab.innerHTML = `
-                    <textarea placeholder="Insert custom HTML here for Tab ${tabCount + 1}"></textarea>
-                    <button onclick="updateTab(${tabCount})">Update Tab</button>
-                    <div class="output"></div>
-                `;
-                document.getElementById('tab-content').appendChild(newTab);
-                
-                const newButton = document.createElement('button');
-                newButton.className = 'tab-button';
-                newButton.innerText = `Tab ${tabCount + 1}`;
-                newButton.onclick = () => openTab(tabCount);
-                document.querySelector('.tabs').insertBefore(newButton, document.querySelector('.tab-button:last-child'));
-                
-                tabCount++;
-            } else {
-                alert('Too many tabs');
-            }
-        }
-
-        function updateTab(index) {
-            const tab = document.getElementById(`tab-${index}`);
-            const textarea = tab.querySelector('textarea');
-            const output = tab.querySelector('.output');
-            output.innerHTML = textarea.value; // Render the HTML input
-        }
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
 <html>
   <style>
 html {
@@ -168,12 +90,5 @@ html {
       <p id="uv-error"></p>
       <pre id="uv-error-code"></pre>
     </div>
-    <footer>
-      <div>
-        <a title=""
-          href="https://kellarosaa.github.io"
-          >my game site</a
-      </div>
-    </footer>
   </body>
 </html>
