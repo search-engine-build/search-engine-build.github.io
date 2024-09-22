@@ -1,4 +1,70 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Tab Management System</title>
+    <style>
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        .tabs {
+            margin-bottom: 10px;
+        }
+        .tab-button {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tabs">
+    <button class="tab-button" onclick="addTab()">Add Tab</button>
+</div>
+<div id="tabContainer"></div>
+<div id="message" style="color: red;"></div>
+
+<script>
+    let tabCount = 0;
+
+    function addTab() {
+        if (tabCount >= 5) {
+            document.getElementById('message').innerText = 'Too many tabs!';
+            return;
+        }
+        tabCount++;
+        const tabId = 'tab' + tabCount;
+        const tabButton = document.createElement('button');
+        tabButton.innerText = 'Tab ' + tabCount;
+        tabButton.className = 'tab-button';
+        tabButton.onclick = () => openTab(tabId);
+        
+        const tabContent = document.createElement('div');
+        tabContent.id = tabId;
+        tabContent.className = 'tab';
+        tabContent.innerHTML = `<h3>Content for Tab ${tabCount}</h3><div contenteditable="true" style="border: 1px solid #ccc; padding: 10px;">Edit your HTML content here</div>`;
+
+        document.querySelector('.tabs').appendChild(tabButton);
+        document.getElementById('tabContainer').appendChild(tabContent);
+        openTab(tabId);
+    }
+
+    function openTab(tabId) {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        document.getElementById('message').innerText = '';
+    }
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
 <html>
   <style>
 html {
