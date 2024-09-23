@@ -92,3 +92,76 @@ html {
     </div>
   </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Tabs with Close</title>
+    <style>
+        .tab {
+            display: inline-block;
+            padding: 10px;
+            background: #f1f1f1;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .tab-content {
+            display: none;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .active {
+            background: #fff;
+            border-bottom: none;
+        }
+        .close {
+            margin-left: 5px;
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="tabs"></div>
+<div id="tabContents"></div>
+<button id="addTab">Add Tab</button>
+
+<script>
+    let tabCount = 0;
+
+    document.getElementById('addTab').onclick = function() {
+        tabCount++;
+        const tab = document.createElement('div');
+        tab.className = 'tab';
+        tab.innerHTML = 'Tab ' + tabCount + ' <span class="close">x</span>';
+        
+        tab.onclick = function() {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById('content' + tabCount).style.display = 'block';
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+        };
+
+        tab.querySelector('.close').onclick = function(event) {
+            event.stopPropagation();
+            tab.remove();
+            document.getElementById('content' + tabCount).remove();
+        };
+
+        const content = document.createElement('div');
+        content.className = 'tab-content';
+        content.id = 'content' + tabCount;
+        content.innerText = 'Content for Tab ' + tabCount;
+
+        document.getElementById('tabs').appendChild(tab);
+        document.getElementById('tabContents').appendChild(content);
+        tab.click(); // Activate the new tab
+    };
+</script>
+
+</body>
+</html>
